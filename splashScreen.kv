@@ -1,0 +1,25 @@
+MDScreen:
+    name: "SplashSCreen"
+    on_enter: self.ids.progress.start()
+
+    FloatLayout:
+        Image:
+            source: "assets/AUTO BIN.gif"
+            allow_stretch: True
+            anim_delay: 0
+            anim_reset: True
+
+    BoxLayout:
+        pos_hint: {"center_x":.5, "center_y": .3}
+        padding: "10dp"
+
+        size_hint_x: .7
+
+        MDProgressBar:
+            id: progress
+
+            orientation: "horizontal"
+            type: "indeterminate"
+
+            run_duration: 1
+            catching_duration: 1

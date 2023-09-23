@@ -1,0 +1,147 @@
+#: import utils kivy.utils
+FirstWindow:
+    LoginWindow:
+    RegisterWindow:
+    MainWindow:
+
+
+<LoginWindow>:
+    name: "log_win"
+
+    FloatLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        Image:
+            source: "assets/Logo.png"
+            pos_hint: {"center_y": .5, "center_y": .8}
+
+
+        MDTextField:
+            id: Name
+            required: True
+            #helper_text_mode: "on_error"
+            #helper_text: "check you username"
+            max_text_length: 40
+            hint_text: "Username"
+            icon_right: "account"
+            hint_text_color: 0.5, 0.5, 0.5, 1
+            size_hint_x: (.4)
+            font_name: "default_font"
+            font_size: 18
+            pos_hint: {"center_x": .5, "center_y": .5}
+        MDTextField:
+            id: passWord
+            required: True
+            max_text_length: 15
+            hint_text: "password"
+            hint_text_color: 0,1,0,1
+            icon_right: "eye-off"
+            size_hint_x: (.4)
+            font_name: "default_font"
+            font_size: 18
+            pos_hint: {"center_x": .5, "center_y": .4}
+            password: True
+
+        #Login
+        MDRaisedButton:
+            text: "Login"
+            md_bg_color: "blue"
+            size_hint_y: (.02)
+            size_hint_x: .4
+            font_name: "default_font"
+            font_size: "24sp"
+            pos_hint: {"center_x": .5, "center_y": .25}
+            on_release: root.check_info()
+
+        #Create account
+        MDFlatButton:
+            font_name: "default_font"
+            text: "[u]Don't have an account?[/u]"
+            theme_text_color: "Custom"
+            text_color: "skyblue"
+            pos_hint: {"center_x": .5, "center_y": .125}
+            on_release:
+                app.root.current = "regis_win"
+                root.manager.transition.direction = "left"
+
+<RegisterWindow>:
+    name: "regis_win"
+
+    FloatLayout:
+        orientation: "vertical"
+        size: root.width, root.height
+
+        MDIconButton:
+            icon: "arrow-left"
+            pos_hint: {"center_x": .1, "center_y": .9}
+            on_release:
+                app.root.current = "log_win"
+                root.manager.transition.direction = "right"
+
+        MDLabel:
+            font_name: "default_font"
+            text: "Create an account"
+            font_size: 20
+            halign: "center"
+            size_hint_y: 1.3
+            pos_hint: {"center_x": .5, "center_y": .7}
+
+        MDTextField:
+            id: F_Name
+            required: True
+            max_text_length: 40
+            font_name: "default_font"
+            hint_text: "Username"
+            hint_text_color: 0.5, 0.5, 0.5, 1
+            size_hint_x: (.4)
+            font_size: 18
+            pos_hint: {"center_x": .5, "center_y": .5}
+        MDTextField:
+            id: F_passWord
+            required: True
+            max_text_length: 15
+            font_name: "default_font"
+            hint_text: "password"
+            hint_text_color: 0,1,0,1
+            size_hint_x: (.4)
+            font_size: 18
+            pos_hint: {"center_x": .5, "center_y": .4}
+
+        #Registeration
+        MDRaisedButton:
+            font_name: "default_font"
+            text: "Register"
+            md_bg_color: utils.get_color_from_hex("#6de888")
+            size_hint_x: .4
+            size_hint_y: .02
+            font_size: "24sp"
+            pos_hint: {"center_x": .5, "center_y": .25}
+            on_release: root.check_data()
+
+<MainWindow>:
+    name: "main"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        MDTopAppBar:
+            font_name: "default_font"
+            title: "Hello"
+            md_bg_color: utils.get_color_from_hex("#327da8")
+            pos_hint: {"top": 1}
+            elevation: 5
+            left_action_items: [["menu", lambda x: app.callback()]]
+
+        MDBottomNavigation:
+            panel_color: utils.get_color_from_hex("#327da8")
+            pos_hint: {"bottom": 1}
+
+            MDBottomNavigationItem:
+                font_name: "default_font"
+                name: "Home Screen"
+                icon: "home"
+
+                MDLabel:
+                    text: "Home Screen is here"
+                    halign: "center"
